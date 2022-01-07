@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AuthController;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,11 +14,59 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->name('dashboard');
+Route::get('/login', function () {
+    return view('auth.login');
+})->name('login');
+
+Route::post('/login', [AuthController::class, 'login']);
 
 Route::get('/', function () {
-    return redirect()->route('dashboard');
+    return redirect()->route('login');
 });
 
+Route::middleware('auth')->group(function () {
+    Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+
+    Route::get('/dashboard', function () {
+        return view('dashboard');
+    });
+    
+    Route::get('/data-barang', function () {
+        return view('barang.list-barang');
+    });
+    
+    Route::get('/peminjaman', function () {
+        return view('peminjaman.peminjaman');
+    });
+    
+    
+    Route::middleware('anggota')->group(function () {
+        Route::get('/history', function () {
+            return view('history.history');
+        });
+
+    });
+    
+    Route::middleware('teknisi')->group(function () {
+        Route::get('/peminjaman/durasi-pinjam', function () {
+            return view('peminjaman.durasi-pinjam');
+        });
+
+        Route::get('/laporan', function () {
+            return view('laporan.laporan');
+        });
+        
+        Route::get('/data-user/teknisi', function () {
+            return view('user.teknisi');
+        });
+        
+        Route::get('/data-user/guru', function () {
+            return view('user.guru');
+        });
+        
+        Route::get('/data-user/siswa', function () {
+            return view('user.siswa');
+        });
+    });
+    
+});

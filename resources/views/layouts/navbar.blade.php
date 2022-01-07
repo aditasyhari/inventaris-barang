@@ -48,7 +48,10 @@
                     </div>
                     <div class="dropdown-divider"></div>
                     <a class="dropdown-item" href="#"><i class="mdi mdi-account-circle m-r-5"></i> Profile</a>
-                    <a class="dropdown-item text-danger" href="#"><i class="mdi mdi-power text-danger"></i> Logout</a>
+                    <a class="dropdown-item text-danger" href="#" onclick="document.getElementById('logout-form').submit()"><i class="mdi mdi-power text-danger"></i> Logout</a>
+                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                        @csrf
+                    </form>
                 </div>                                                                    
             </div>
         </li>
