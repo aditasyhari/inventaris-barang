@@ -17,13 +17,7 @@ class User extends Authenticatable
      *
      * @var array<int, string>
      */
-    protected $fillable = [
-        'nik/nis',
-        'email',
-        'password',
-        'role',
-        'aktif',
-    ];
+    protected $guarded = [];
 
     /**
      * The attributes that should be hidden for serialization.
@@ -43,4 +37,8 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function profile() {
+        return $this->belongsTo(Profile::class, 'user_id');
+    }
 }

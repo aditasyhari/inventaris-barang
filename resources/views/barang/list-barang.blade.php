@@ -3,6 +3,7 @@
 @section('title') List Barang @endsection
 
 @section('css')
+<link href="{{ asset('plugins/sweet-alert2/sweetalert2.min.css') }}" rel="stylesheet" type="text/css">
 @endsection
 
 @section('breadcrumb')
@@ -25,93 +26,57 @@
         <div class="card m-b-20">
             <div class="card-body">
 
-                <button class="btn btn-primary mb-3">Pinjam Barang</button>
+                @if (Auth::user()->role == 'teknisi')
+                    <a href="{{ url('/data-barang/tambah') }}" class="btn btn-primary mb-3">Tambah Barang</a>
+                @endif
+
+                @if ($message = Session::get('status'))
+                    <div class="alert alert-primary alert-block mb-3">
+                        <button type="button" class="close" data-dismiss="alert">×</button>    
+                        <strong>{{ $message }}</strong>
+                    </div>
+                @endif
 
                 <table id="datatable" class="table table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
                     <thead>
                         <tr>
-                            <th>Name</th>
-                            <th>Position</th>
-                            <th>Office</th>
-                            <th>Age</th>
-                            <th>Start date</th>
-                            <th>Salary</th>
+                            <th>No</th>
+                            <th>Kode</th>
+                            <th width="10%">Foto</th>
+                            <th>Nama</th>
+                            <th>Merk</th>
+                            <th>Harga Satuan</th>
+                            <th>Jumlah</th>
+                            <th>Tersedia</th>
+                            <th>Kondisi</th>
+                            @if (Auth::user()->role == 'teknisi')
+                            <th>Action</th>
+                            @endif
                         </tr>
                     </thead>
 
                     <tbody>
+                        @foreach($barang as $b)
                         <tr>
-                            <td>Tiger Nixon</td>
-                            <td>System Architect</td>
-                            <td>Edinburgh</td>
-                            <td>61</td>
-                            <td>2011/04/25</td>
-                            <td>$320,800</td>
+                            <td>{{ $loop->iteration }}</td>
+                            <td>{{ $b->kode }}</td>
+                            <td>
+                                <img src="{{ asset('image/barang/'.$b->foto) }}" alt="Foto Barang" class="img-fluid" style="max-width: 100%;">
+                            </td>
+                            <td>{{ $b->nama }}</td>
+                            <td>{{ $b->merk }}</td>
+                            <td>Rp {{ number_format($b->harga, 0, '.', '.') }}</td>
+                            <td>{{ $b->jumlah }}</td>
+                            <td>{{ $b->tersedia }}</td>
+                            <td>{{ $b->kondisi }}</td>
+                            @if (Auth::user()->role == 'teknisi')
+                            <td>
+                                <a href="{{ url('/data-barang/edit/'.$b->id) }}" class="btn btn-success" title="Edit"><i class="mdi mdi-pencil"></i></a>
+                                <button type="button" class="btn btn-danger sa-warning" data-id="{{ $b->id }}" title="Hapus"><i class="mdi mdi-delete"></i></button>
+                            </td>
+                            @endif
                         </tr>
-                        <tr>
-                            <td>Garrett Winters</td>
-                            <td>Accountant</td>
-                            <td>Tokyo</td>
-                            <td>63</td>
-                            <td>2011/07/25</td>
-                            <td>$170,750</td>
-                        </tr>
-                        <tr>
-                            <td>Ashton Cox</td>
-                            <td>Junior Technical Author</td>
-                            <td>San Francisco</td>
-                            <td>66</td>
-                            <td>2009/01/12</td>
-                            <td>$86,000</td>
-                        </tr>
-                        <tr>
-                            <td>Cedric Kelly</td>
-                            <td>Senior Javascript Developer</td>
-                            <td>Edinburgh</td>
-                            <td>22</td>
-                            <td>2012/03/29</td>
-                            <td>$433,060</td>
-                        </tr>
-                        <tr>
-                            <td>Airi Satou</td>
-                            <td>Accountant</td>
-                            <td>Tokyo</td>
-                            <td>33</td>
-                            <td>2008/11/28</td>
-                            <td>$162,700</td>
-                        </tr>
-                        <tr>
-                            <td>Brielle Williamson</td>
-                            <td>Integration Specialist</td>
-                            <td>New York</td>
-                            <td>61</td>
-                            <td>2012/12/02</td>
-                            <td>$372,000</td>
-                        </tr>
-                        <tr>
-                            <td>Herrod Chandler</td>
-                            <td>Sales Assistant</td>
-                            <td>San Francisco</td>
-                            <td>59</td>
-                            <td>2012/08/06</td>
-                            <td>$137,500</td>
-                        </tr>
-                        <tr>
-                            <td>Rhona Davidson</td>
-                            <td>Integration Specialist</td>
-                            <td>Tokyo</td>
-                            <td>55</td>
-                            <td>2010/10/14</td>
-                            <td>$327,900</td>
-                        </tr>
-                        <tr>
-                            <td>Colleen Hurst</td>
-                            <td>Javascript Developer</td>
-                            <td>San Francisco</td>
-                            <td>39</td>
-                            <td>2009/09/15</td>
-                            <td>$205,500</td>
-                        </tr>
+                        @endforeach
                     </tbody>
                 </table>
 
@@ -122,4 +87,6 @@
 @endsection
 
 @section('js')
+<script src="{{ asset('plugins/sweet-alert2/sweetalert2.min.js') }}"></script>
+<script src="{{ asset('assets/pages/barang/sweet-alert.init.js') }}"></script>
 @endsection

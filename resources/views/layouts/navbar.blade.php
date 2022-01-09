@@ -38,13 +38,13 @@
         <li class="dropdown notification-list">
             <div class="dropdown notification-list nav-pro-img">
                 <a class="dropdown-toggle nav-link arrow-none waves-effect nav-user waves-light" data-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
-                    <img src="assets/images/users/user-4.jpg" alt="user" class="rounded-circle">
+                    <img src="{{ asset('assets/images/users/user-4.jpg') }}" alt="user" class="rounded-circle">
                 </a>
                 <div class="dropdown-menu dropdown-menu-right profile-dropdown ">
                     <!-- item-->
-                    <div class="dropdown-item-text">
-                        Dewi Titis Suminar<br>
-                        <span class="text-muted">Teknisi</span>
+                    <div class="dropdown-item text-wrap">
+                        <span class="text-truncate">{{ Auth::user()->email }}</span><br>
+                        <span class="text-muted text-capitalize">{{ Auth::user()->role }}</span>
                     </div>
                     <div class="dropdown-divider"></div>
                     <a class="dropdown-item" href="#"><i class="mdi mdi-account-circle m-r-5"></i> Profile</a>

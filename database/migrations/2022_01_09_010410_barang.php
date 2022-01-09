@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class Profile extends Migration
+class Barang extends Migration
 {
     /**
      * Run the migrations.
@@ -14,12 +14,16 @@ class Profile extends Migration
     public function up()
     {
         //
-        Schema::create('profile', function (Blueprint $table) {
+        Schema::create('barang', function (Blueprint $table) {
             $table->id();
-            $table->string('nama', 45)->nullable();
-            $table->string('no_telp', 15)->nullable();
-            $table->string('foto');
-            $table->foreignId('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->string('kode', 45)->unique();
+            $table->string('nama', 45);
+            $table->string('merk', 45);
+            $table->integer('harga');
+            $table->integer('jumlah');
+            $table->integer('tersedia');
+            $table->string('kondisi');
+            $table->string('foto')->nullable();
             $table->timestamps();
         });
     }

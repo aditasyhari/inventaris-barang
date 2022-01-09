@@ -44,20 +44,16 @@
         //Warning Message
         $('#sa-warning').click(function () {
             swal({
-                title: 'Are you sure?',
-                text: "You won't be able to revert this!",
-                type: 'warning',
+                title: "Apakah anda yakin?",
+                text: "Anda tidak akan dapat mengembalikan ini!",
+                type: "warning",
                 showCancelButton: true,
-                confirmButtonClass: 'btn btn-success',
-                cancelButtonClass: 'btn btn-danger m-l-10',
-                confirmButtonText: 'Yes, delete it!'
+                confirmButtonClass: "btn btn-success",
+                cancelButtonClass: "btn btn-danger m-l-10",
+                confirmButtonText: "Ya, hapus!",
             }).then(function () {
-                swal(
-                    'Deleted!',
-                    'Your file has been deleted.',
-                    'success'
-                )
-            })
+                swal("Deleted!", "Berhasil dihapus.", "success");
+            });
         });
 
         //Parameter

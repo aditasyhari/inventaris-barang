@@ -31,7 +31,10 @@
                         <h4 class="">Internal Server Error</h4><br>
 
                         @if ($message = Session::get('e'))
-                            {{ $message }}
+                            <div class="alert alert-danger alert-block">
+                                <button type="button" class="close" data-dismiss="alert">×</button>    
+                                {{ $message }}
+                            </div>
                         @endif
 
                         <a class="btn btn-info mb-5 waves-effect waves-light" href="{{ url()->previous() }}"><i class="mdi mdi-chevron-left"></i> Back</a>

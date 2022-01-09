@@ -21,19 +21,24 @@
                         <i class="mdi mdi-book-open"></i><span> Peminjaman </span>
                     </a>
                 </li>
+
+                @if (Auth::user()->role != 'teknisi')
                 <li>
                     <a href="{{ url('/history') }}" class="waves-effect">
                         <i class="mdi mdi-history"></i><span> History </span>
                     </a>
                 </li>
+                @endif
 
+                @if (Auth::user()->role == 'teknisi')
                 <li>
                     <a href="{{ url('/laporan') }}" class="waves-effect">
                         <i class="mdi mdi-file-chart"></i><span> Laporan </span>
                     </a>
                 </li>
                 <br>
-                <!-- <li class="menu-title">Pengaturan</li> -->
+                
+                <li class="menu-title">Pengaturan</li>
                 <li>
                     <a href="javascript:void(0);" class="waves-effect"><i class="mdi mdi-account-box"></i><span> Data User </span></a>
                     <ul class="submenu">
@@ -47,6 +52,7 @@
                         <i class="mdi mdi-timer-sand-full"></i><span> Durasi Pinjam </span>
                     </a>
                 </li>
+                @endif
 
             </ul>
 
