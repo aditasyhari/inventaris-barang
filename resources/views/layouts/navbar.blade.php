@@ -2,7 +2,7 @@
 
     <ul class="navbar-right d-flex list-inline float-right mb-0">
 
-        <li class="dropdown notification-list">
+        {{--<li class="dropdown notification-list">
             <a class="nav-link dropdown-toggle arrow-none waves-effect waves-light" data-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
                 <i class="mdi mdi-bell noti-icon"></i>
                 <span class="badge badge-pill badge-info noti-icon-badge">3</span>
@@ -34,7 +34,7 @@
                     View all <i class="fi-arrow-right"></i>
                 </a>
             </div>        
-        </li>
+        </li>--}}
         <li class="dropdown notification-list">
             <div class="dropdown notification-list nav-pro-img">
                 <a class="dropdown-toggle nav-link arrow-none waves-effect nav-user waves-light" data-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">

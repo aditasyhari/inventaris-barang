@@ -3,6 +3,7 @@
 @section('title') Peminjaman @endsection
 
 @section('css')
+<link href="{{ asset('plugins/sweet-alert2/sweetalert2.min.css') }}" rel="stylesheet" type="text/css">
 @endsection
 
 @section('breadcrumb')
@@ -20,18 +21,31 @@
 @endsection
 
 @section('content')
- <div class="row">
-    <div class="col-12">
-        <div class="card">
-            <div class="card-body">
-                <div style="min-height: 300px;">
-                    <p>Your content here</p>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+@if (Auth::user()->role == 'teknisi')
+    @include('peminjaman.peminjaman-teknisi')   
+@else
+    @include('peminjaman.peminjaman-anggota')
+@endif
 @endsection
 
 @section('js')
+<script src="{{ asset('plugins/sweet-alert2/sweetalert2.min.js') }}"></script>
+<script src="{{ asset('assets/pages/peminjaman/peminjaman.js') }}"></script>
+
+<script>
+    var now = new Date();
+    now.setMinutes(now.getMinutes() - now.getTimezoneOffset());
+    document.getElementById('tgl_pinjam').value = now.toISOString().slice(0,16);
+
+    var future = new Date();
+    @if (Auth::user()->role == 'guru')
+        future.setDate(future.getDate() + 6);
+        future.setMinutes(future.getMinutes() - future.getTimezoneOffset());
+        document.getElementById('tgl_kembali').value = future.toISOString().slice(0,16);
+    @else
+        future.setDate(future.getDate() + 3);
+        future.setMinutes(future.getMinutes() - future.getTimezoneOffset());
+        document.getElementById('tgl_kembali').value = future.toISOString().slice(0,16);
+    @endif
+</script>
 @endsection

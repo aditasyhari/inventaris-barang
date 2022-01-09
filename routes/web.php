@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\BarangController;
+use App\Http\Controllers\PeminjamanController;
 
 /*
 |--------------------------------------------------------------------------
@@ -35,9 +36,8 @@ Route::middleware('auth')->group(function () {
     
     Route::get('/data-barang', [BarangController::class, 'index']);
     
-    Route::get('/peminjaman', function () {
-        return view('peminjaman.peminjaman');
-    });
+    Route::get('/peminjaman', [PeminjamanController::class, 'index']);
+    Route::post('/peminjaman/anggota/pinjam', [PeminjamanController::class, 'store']);
     
     
     Route::middleware('anggota')->group(function () {
@@ -54,9 +54,9 @@ Route::middleware('auth')->group(function () {
         Route::put('/data-barang/update/{id}', [BarangController::class, 'update']);
         Route::delete('/data-barang/hapus/{id}', [BarangController::class, 'destroy']);   
 
-        Route::get('/peminjaman/durasi-pinjam', function () {
-            return view('peminjaman.durasi-pinjam');
-        });
+        // Route::get('/peminjaman/durasi-pinjam', function () {
+        //     return view('peminjaman.durasi-pinjam');
+        // });
 
         Route::get('/laporan', function () {
             return view('laporan.laporan');

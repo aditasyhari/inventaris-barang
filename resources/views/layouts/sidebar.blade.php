@@ -47,11 +47,11 @@
                         <li><a href="{{ url('/data-user/siswa') }}">Siswa</a></li>
                     </ul>
                 </li>
-                <li>
+                <!-- <li>
                     <a href="{{ url('/peminjaman/durasi-pinjam') }}" class="waves-effect">
                         <i class="mdi mdi-timer-sand-full"></i><span> Durasi Pinjam </span>
                     </a>
-                </li>
+                </li> -->
                 @endif
 
             </ul>
