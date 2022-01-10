@@ -35,6 +35,8 @@ Route::middleware('auth')->group(function () {
     });
     
     Route::get('/profile', [AuthController::class, 'profile']);
+    Route::post('/profile/ubah-profile', [AuthController::class, 'ubah_profile']);
+    Route::post('/profile/ubah-password', [AuthController::class, 'ubah_password']);
 
     Route::get('/data-barang', [BarangController::class, 'index']);
     
