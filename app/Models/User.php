@@ -39,6 +39,10 @@ class User extends Authenticatable
     ];
 
     public function profile() {
-        return $this->belongsTo(Profile::class, 'user_id');
+        return $this->hasOne(Profile::class, 'user_id');
+    }
+
+    public function peminjaman() {
+        return $this->hasMany(Peminjaman::class);
     }
 }

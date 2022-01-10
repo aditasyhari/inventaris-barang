@@ -34,17 +34,17 @@ Route::middleware('auth')->group(function () {
         return view('dashboard');
     });
     
+    Route::get('/profile', [AuthController::class, 'profile']);
+
     Route::get('/data-barang', [BarangController::class, 'index']);
     
     Route::get('/peminjaman', [PeminjamanController::class, 'index']);
-    Route::post('/peminjaman/anggota/pinjam', [PeminjamanController::class, 'store']);
-    
     
     Route::middleware('anggota')->group(function () {
+        Route::post('/peminjaman/anggota/pinjam', [PeminjamanController::class, 'store']);
         Route::get('/history', function () {
             return view('history.history');
         });
-
     });
     
     Route::middleware('teknisi')->group(function () {
@@ -54,9 +54,9 @@ Route::middleware('auth')->group(function () {
         Route::put('/data-barang/update/{id}', [BarangController::class, 'update']);
         Route::delete('/data-barang/hapus/{id}', [BarangController::class, 'destroy']);   
 
-        // Route::get('/peminjaman/durasi-pinjam', function () {
-        //     return view('peminjaman.durasi-pinjam');
-        // });
+        Route::get('/peminjaman/detail/{id}', [PeminjamanController::class, 'show']);
+        Route::put('/peminjaman/persetujuan/setuju/{id}', [PeminjamanController::class, 'setuju']);
+        Route::put('/peminjaman/persetujuan/tolak/{id}', [PeminjamanController::class, 'tolak']);   
 
         Route::get('/laporan', function () {
             return view('laporan.laporan');

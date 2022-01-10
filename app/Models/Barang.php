@@ -17,4 +17,8 @@ class Barang extends Model
         if ($this->foto && file_exists(public_path('image/barang/' . $this->foto)))
             return unlink(public_path('image/barang/' . $this->foto));
     }
+
+    public function peminjaman_barang() {
+        return $this->hasMany(PeminjamanBarang::class);
+    }
 }

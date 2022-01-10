@@ -11,4 +11,12 @@ class PeminjamanBarang extends Model
     protected $table = "peminjaman_barang";
     protected $primaryKey = "id";
     protected $guarded = [];
+
+    public function peminjaman() {
+        return $this->belongsTo(Peminjaman::class);
+    }
+
+    public function barang() {
+        return $this->belongsTo(Barang::class);
+    }
 }

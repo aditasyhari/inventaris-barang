@@ -22,7 +22,9 @@ class PeminjamanController extends Controller
     {
         //
         $barang = Barang::orderBy('nama', 'asc')->get();
-        return view('peminjaman.peminjaman', compact('barang'));
+        $peminjaman = Peminjaman::with(['user', 'user.profile'])->orderBy('id', 'desc')->get();
+
+        return view('peminjaman.peminjaman', compact(['barang', 'peminjaman']));
     }
 
     /**
@@ -44,7 +46,7 @@ class PeminjamanController extends Controller
     public function store(Request $request)
     {
         //
-        // try {
+        try {
             $validator = Validator::make($request->all(), 
                 [ 
                     'kelas' => 'required',
@@ -82,9 +84,9 @@ class PeminjamanController extends Controller
 
             return back()->with('status', 'Berhasil diajukan peminjaman, tunggu persetujuan!');
 
-        // } catch (Exception $e) {
-        //     return view('error')->with('e', $e);
-        // }
+        } catch (Exception $e) {
+            return view('error');
+        }
     }
 
     /**
@@ -96,6 +98,8 @@ class PeminjamanController extends Controller
     public function show($id)
     {
         //
+        $p = Peminjaman::with(['user', 'user.profile', 'peminjaman_barang', 'peminjaman_barang.barang'])->where('id', $id)->first();
+        return view('peminjaman.detail', compact('p'));
     }
 
     /**
@@ -135,5 +139,45 @@ class PeminjamanController extends Controller
     public function getDateAttribute($value)
     {
         return Carbon::parse($value)->format('Y-m-d H:i:00');
+    }
+
+    public function setuju($id)
+    {
+        try {
+            $p = Peminjaman::with(['peminjaman_barang', 'peminjaman_barang.barang'])->where('id', $id)->first();
+
+            $p->update([
+                'persetujuan' => 'disetujui'
+            ]);
+
+            if($p) {
+                foreach($p->peminjaman_barang as $pb) {
+                    if($pb->jumlah <= $pb->barang->tersedia) {
+                        $pb->barang->update([
+                            'tersedia' => $pb->barang->tersedia - $pb->jumlah
+                        ]);
+                    }
+                }
+
+                return redirect('/peminjaman')->with('status', 'Status persetujuan berhasil diperbarui.');
+            }
+
+        } catch (Exception $e) {
+            return view('error');
+        }
+    }
+
+    public function tolak($id)
+    {
+        try {
+            $peminjaman = Peminjaman::find($id);
+            $peminjaman->update([
+                'persetujuan' => 'ditolak'
+            ]);
+
+            return redirect('/peminjaman')->with('status', 'Status persetujuan berhasil diperbarui.');
+        } catch (Exception $e) {
+            return view('error');
+        }
     }
 }

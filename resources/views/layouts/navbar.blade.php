@@ -35,6 +35,11 @@
                 </a>
             </div>        
         </li>--}}
+        <li class="dropdown notification-list my-auto">
+            <h6 class="text-white">
+                {{ Auth::user()->email }}
+            </h6>
+        </li>
         <li class="dropdown notification-list">
             <div class="dropdown notification-list nav-pro-img">
                 <a class="dropdown-toggle nav-link arrow-none waves-effect nav-user waves-light" data-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
@@ -43,7 +48,6 @@
                 <div class="dropdown-menu dropdown-menu-right profile-dropdown ">
                     <!-- item-->
                     <div class="dropdown-item text-wrap">
-                        <span class="text-truncate">{{ Auth::user()->email }}</span><br>
                         <span class="text-muted text-capitalize">{{ Auth::user()->role }}</span>
                     </div>
                     <div class="dropdown-divider"></div>

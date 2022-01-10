@@ -10,6 +10,17 @@ use Exception;
 class AuthController extends Controller
 {
     //
+    public function profile()
+    {
+        try {
+            $user = Auth::with('profile');
+            dd($user);
+            return view('auth.profile', compact('user'));
+        } catch (Exception $e) {
+            return view('error');
+        }
+    }
+
     public function login(Request $request)
     {
         try {
