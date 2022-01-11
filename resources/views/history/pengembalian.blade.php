@@ -39,21 +39,18 @@
                             <th>Kelas</th>
                             <th>Mapel</th>
                             <th>Tgl Pinjam</th>
-                            <th>Tgl Kembali (Maksimal)</th>
-                            <th>Status Kembali</th>
-                            <th>Action</th>
+                            <th>Status</th>
                         </tr>
                     </thead>
 
                     <tbody>
-                        @foreach($peminjaman as $p)
+                        @foreach($laporan as $p)
                         <tr>
                             <td>{{ $loop->iteration }}</td>
                             <td>{{ $p->user->profile->nama }}</td>
                             <td>{{ $p->kelas }}</td>
                             <td>{{ $p->mapel }}</td>
                             <td>{{ $p->tgl_pinjam }}</td>
-                            <td>{{ $p->tgl_kembali }}</td>
                             <td>
                                 @if($p->status_kembali == 'selesai')
                                 <span class="badge badge-primary text-uppercase">Sudah Dikembalikan</span>
@@ -64,9 +61,6 @@
                                 @else
                                 ----
                                 @endif
-                            </td>
-                            <td>
-                                <a href="{{ url('/pengembalian/detail/'.$p->id) }}" class="btn btn-info" title="Detail"><i class="mdi mdi-eye"></i></a>
                             </td>
                         </tr>
                         @endforeach

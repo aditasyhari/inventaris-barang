@@ -6,6 +6,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\BarangController;
 use App\Http\Controllers\PeminjamanController;
 use App\Http\Controllers\HistoryController;
+use App\Http\Controllers\LaporanController;
 
 /*
 |--------------------------------------------------------------------------
@@ -65,9 +66,8 @@ Route::middleware('auth')->group(function () {
         Route::get('/pengembalian/detail/{id}', [HistoryController::class, 'detail']);
         Route::put('/pengembalian/{id}', [HistoryController::class, 'selesai']);
 
-        Route::get('/laporan', function () {
-            return view('laporan.laporan');
-        });
+        Route::get('/laporan', [LaporanController::class, 'index'])->name('laporan');
+        Route::post('/laporan', [LaporanController::class, 'lihat']);
         
         Route::get('/data-user/teknisi', [UserController::class, 'teknisi']);
         Route::get('/data-user/guru', [UserController::class, 'guru']);
