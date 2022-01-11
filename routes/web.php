@@ -5,6 +5,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\BarangController;
 use App\Http\Controllers\PeminjamanController;
+use App\Http\Controllers\HistoryController;
 
 /*
 |--------------------------------------------------------------------------
@@ -44,9 +45,9 @@ Route::middleware('auth')->group(function () {
     
     Route::middleware('anggota')->group(function () {
         Route::post('/peminjaman/anggota/pinjam', [PeminjamanController::class, 'store']);
-        Route::get('/history', function () {
-            return view('history.history');
-        });
+        Route::get('/history', [HistoryController::class, 'index']);
+        Route::get('/history/detail/{id}', [HistoryController::class, 'show']);
+        Route::put('/history/kembalikan/{id}', [HistoryController::class, 'kembalikan']);
     });
     
     Route::middleware('teknisi')->group(function () {
@@ -55,10 +56,14 @@ Route::middleware('auth')->group(function () {
         Route::post('/data-barang/tambah', [BarangController::class, 'store']);
         Route::put('/data-barang/update/{id}', [BarangController::class, 'update']);
         Route::delete('/data-barang/hapus/{id}', [BarangController::class, 'destroy']);   
-
+        
         Route::get('/peminjaman/detail/{id}', [PeminjamanController::class, 'show']);
         Route::put('/peminjaman/persetujuan/setuju/{id}', [PeminjamanController::class, 'setuju']);
-        Route::put('/peminjaman/persetujuan/tolak/{id}', [PeminjamanController::class, 'tolak']);   
+        Route::put('/peminjaman/persetujuan/tolak/{id}', [PeminjamanController::class, 'tolak']);
+
+        Route::get('/pengembalian', [HistoryController::class, 'list_pengembalian']);
+        Route::get('/pengembalian/detail/{id}', [HistoryController::class, 'detail']);
+        Route::put('/pengembalian/{id}', [HistoryController::class, 'selesai']);
 
         Route::get('/laporan', function () {
             return view('laporan.laporan');

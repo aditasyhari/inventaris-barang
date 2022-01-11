@@ -32,6 +32,11 @@
 
                 @if (Auth::user()->role == 'teknisi')
                 <li>
+                    <a href="{{ url('/pengembalian') }}" class="waves-effect">
+                        <i class="mdi mdi-file"></i><span> Pengembalian </span>
+                    </a>
+                </li>
+                <li>
                     <a href="{{ url('/laporan') }}" class="waves-effect">
                         <i class="mdi mdi-file-chart"></i><span> Laporan </span>
                     </a>

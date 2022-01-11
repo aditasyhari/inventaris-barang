@@ -22,6 +22,7 @@ class CreatePeminjamenTable extends Migration
             $table->datetime('tgl_kembali');
             $table->text('keterangan');
             $table->enum('persetujuan', ['disetujui', 'ditolak', 'pending'])->default('pending');
+            $table->enum('status_kembali', ['selesai', 'belum', 'meminta'])->nullable();
             $table->foreignId('user_id')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
             $table->timestamps();
         });
