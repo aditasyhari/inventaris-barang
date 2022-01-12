@@ -6,7 +6,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
         <title>Login | Inventaris Bengkel</title>
-        <link rel="shortcut icon" href="{{ asset('assets/images/favicon.ico') }}">
+        <link rel="shortcut icon" href="{{ asset('image/logo.png') }}">
 
         <link href="{{ asset('assets/css/bootstrap.min.css') }}" rel="stylesheet" type="text/css">
         <link href="{{ asset('assets/css/metismenu.min.css') }}" rel="stylesheet" type="text/css">
@@ -25,7 +25,7 @@
                 <div class="card-body">
 
                     <h3 class="text-center m-0">
-                        <a href="index.html" class="logo logo-admin"><img src="{{ asset('assets/images/logo.png') }}" height="30" alt="logo"></a>
+                        <a href="#" class="logo logo-admin"><img src="{{ asset('image/logo.png') }}" height="100" alt="logo"></a>
                     </h3>
 
                     <div class="p-3">

@@ -7,7 +7,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
         <meta name="csrf-token" content="{{ csrf_token() }}">
         <title>@yield('title') | Inventaris Bengkel</title>
-        <link rel="shortcut icon" href="{{ asset('assets/images/favicon.ico') }}">
+        <link rel="shortcut icon" href="{{ asset('image/logo.png') }}">
 
         <link rel="stylesheet" href="{{ asset('plugins/morris/morris.css') }}">
         <link href="{{ asset('plugins/datatables/dataTables.bootstrap4.min.css') }}" rel="stylesheet" type="text/css" />
@@ -33,10 +33,10 @@
                 <div class="topbar-left">
                     <a href="#" class="logo">
                         <span>
-                            <img src="{{ asset('assets/images/logo.png') }}" alt="" height="24">
+                            <img src="{{ asset('image/logo.png') }}" alt="" height="70">
                         </span>
                         <i>
-                            <img src="{{ asset('assets/images/logo-sm.png') }}" alt="" height="22">
+                            <img src="{{ asset('images/logo.png') }}" alt="" height="50">
                         </i>
                     </a>
                 </div>
