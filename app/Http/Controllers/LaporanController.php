@@ -21,6 +21,7 @@ class LaporanController extends Controller
                     ->whereMonth('tgl_pinjam', $request->bulan)
                     ->whereYear('tgl_pinjam', $request->tahun)
                     ->where('status_kembali', 'selesai')
+                    ->where('status_kembali', 'belum')
                     ->orderBy('id', 'desc')
                     ->get();
 

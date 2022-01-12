@@ -40,11 +40,12 @@
                             <th>Mapel</th>
                             <th>Tgl Pinjam</th>
                             <th>Status</th>
+                            <th>Action</th>
                         </tr>
                     </thead>
 
                     <tbody>
-                        @foreach($laporan as $p)
+                        @foreach($peminjaman as $p)
                         <tr>
                             <td>{{ $loop->iteration }}</td>
                             <td>{{ $p->user->profile->nama }}</td>
@@ -61,6 +62,9 @@
                                 @else
                                 ----
                                 @endif
+                            </td>
+                            <td>
+                                <a href="{{ url('/pengembalian/detail/'.$p->id) }}" class="btn btn-info" title="Detail"><i class="mdi mdi-eye"></i></a>
                             </td>
                         </tr>
                         @endforeach

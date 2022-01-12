@@ -49,7 +49,7 @@
                             <td>{{ $u->email }}</td>
                             <td class="text-capitalize">{{ $u->role }}</td>
                             <td>
-                                <input data-id="{{$u->id}}" class="toggle-class" type="checkbox" data-onstyle="success" data-offstyle="danger" data-toggle="toggle" data-on="Active" data-off="InActive" {{ $u->aktif ? 'checked' : '' }}>
+                                <input data-id="{{$u->id}}" class="toggle-class" type="checkbox" data-onstyle="success" data-offstyle="danger" data-toggle="toggle" data-on="Aktif" data-off="Tidak Aktif" {{ $u->aktif ? 'checked' : '' }}>
                             </td>
                             <td>
                                 <button type="button" class="btn btn-danger sa-warning" data-id="{{ $u->id }}" title="Hapus"><i class="mdi mdi-delete"></i></button>

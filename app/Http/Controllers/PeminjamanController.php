@@ -147,7 +147,8 @@ class PeminjamanController extends Controller
             $p = Peminjaman::with(['peminjaman_barang', 'peminjaman_barang.barang'])->where('id', $id)->first();
 
             $p->update([
-                'persetujuan' => 'disetujui'
+                'persetujuan' => 'disetujui',
+                'status_kembali' => 'belum'
             ]);
 
             if($p) {

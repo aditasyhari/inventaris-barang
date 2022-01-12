@@ -149,7 +149,7 @@ class UserController extends Controller
     {
         try {
             $user = User::find($request->user_id);
-            $user->aktif = $request->status;
+            $user->aktif = $request->aktif;
             $user->save();
     
             return response()->json(['success'=>'Status berhasil diubah.']);
