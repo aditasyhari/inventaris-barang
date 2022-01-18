@@ -24,7 +24,7 @@
         <div class="card">
             <div class="card-body">
                 <div>
-                    <img src="{{ asset('image/welcome.jpg') }}" alt="welcome" class="img-fluid">
+                    <img src="{{ asset('image/smk-imud.png') }}" alt="welcome" class="img-fluid">
                 </div>
             </div>
         </div>
