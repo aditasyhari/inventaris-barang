@@ -49,6 +49,7 @@
                             <th>Jumlah</th>
                             <th>Tersedia</th>
                             <th>Kondisi</th>
+                            <th>Bawa Pulang</th>
                             @if (Auth::user()->role == 'teknisi')
                             <th>Action</th>
                             @endif
@@ -69,6 +70,13 @@
                             <td>{{ $b->jumlah }}</td>
                             <td>{{ $b->tersedia }}</td>
                             <td>{{ $b->kondisi }}</td>
+                            <td>
+                                @if($b->bawa_pulang == 0)
+                                    <span class="text-danger">Tidak</span>
+                                    @else
+                                    <span class="text-primary">Ya</span>
+                                @endif
+                            </td>
                             @if (Auth::user()->role == 'teknisi')
                             <td>
                                 <a href="{{ url('/data-barang/edit/'.$b->id) }}" class="btn btn-success" title="Edit"><i class="mdi mdi-pencil"></i></a>

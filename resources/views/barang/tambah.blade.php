@@ -79,6 +79,15 @@
                         </div>
                     </div>
                     <div class="form-group row">
+                        <label for="" class="col-sm-2 col-form-label">Boleh Bawa Pulang ?</label> 
+                        <div class="col-sm-10">
+                            <select name="bawa_pulang" id="" class="form-control" required>
+                                <option value="0">Tidak</option>
+                                <option value="1">Ya</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group row">
                         <label for="" class="col-sm-2 col-form-label">Foto</label> 
                         <div class="col-sm-10">
                             <input class="form-control" type="file" placeholder="Foto barang" name="foto" accept="images/*" required>

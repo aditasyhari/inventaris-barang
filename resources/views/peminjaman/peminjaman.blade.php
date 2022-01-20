@@ -39,11 +39,11 @@
 
     var future = new Date();
     @if (Auth::user()->role == 'guru')
-        future.setDate(future.getDate() + 6);
+        future.setDate(future.getDate() + 7);
         future.setMinutes(future.getMinutes() - future.getTimezoneOffset());
         document.getElementById('tgl_kembali').value = future.toISOString().slice(0,16);
     @else
-        future.setDate(future.getDate() + 3);
+        future.setDate(future.getDate() + 4);
         future.setMinutes(future.getMinutes() - future.getTimezoneOffset());
         document.getElementById('tgl_kembali').value = future.toISOString().slice(0,16);
     @endif
