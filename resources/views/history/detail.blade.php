@@ -108,6 +108,29 @@
                 @if(Auth::user()->role == 'teknisi')
                     @if($p->status_kembali == 'meminta')
                     <div class="form-group row">
+                        <label for="" class="col-sm-2 col-form-label">Bukti</label>
+                        <div class="col-sm-10">
+                            <a href="#" class="pop">
+                                <img src="{{ asset('image/bukti/'.$p->foto_bukti) }}" alt="Foto Bukti" class="img-fluid" style="max-width: 400px">
+                            </a>
+                        </div>
+
+                        <div class="modal fade" id="imagemodal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                            <div class="modal-dialog modal-lg">							   
+                                <div class="modal-content">         						      
+                                    <div class="modal-body">
+                                                                        
+                                    <button type="button" class="close" data-dismiss="modal"><span 
+                                    aria-hidden="true">&times;</span></button>						        
+                                    <img src="" class="imagepreview" style="width: 100%;">
+                                                                    
+                                    </div>							    
+                                </div>								   
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="form-group row">
                         <label for="" class="col-sm-2 col-form-label"></label>
                         <div class="col-sm-10">
                             <div class="d-flex flex-row">
@@ -126,14 +149,46 @@
                         <label for="" class="col-sm-2 col-form-label"></label>
                         <div class="col-sm-10">
                             <div class="d-flex flex-row">
-                                <form action="{{ url('/history/kembalikan/'.$p->id) }}" method="POST">
-                                    @csrf
-                                    @method('put')
-                                    <button type="submit" class="btn btn-primary">Kembalikan</button>
-                                </form>
+                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#kembalikan">
+                                Kembalikan
+                                </button>
+                                
                             </div>
                         </div>
                     </div>
+
+
+                    <!-- Modal -->
+                    <div class="modal fade" id="kembalikan" tabindex="-1" aria-labelledby="kembalikanLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="kembalikanLabel">Bukti Pengembalian</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <form action="{{ url('/history/kembalikan/'.$p->id) }}" method="POST" enctype="multipart/form-data">
+                                @csrf
+                                @method('put')
+                                <div class="form-group">
+                                    <label for="example-text-input" class="col-sm col-form-label">Bukti Pengembalian</label>
+                                    <div class="col-sm">
+                                        <input class="form-control" type="file" name="foto_bukti" accept="images/*" required>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                <button type="submit" class="btn btn-primary">Kembalikan</button>
+                            </form>
+                        </div>
+                        </div>
+                    </div>
+                    </div>
+
+
                     @endif
                 @endif
 
@@ -146,4 +201,13 @@
 @section('js')
 <script src="{{ asset('plugins/sweet-alert2/sweetalert2.min.js') }}"></script>
 <script src="{{ asset('assets/pages/history/history.js') }}"></script>
+
+<script>
+   $(function() {
+     $('.pop').on('click', function() {
+       $('.imagepreview').attr('src',$(this).find('img').attr('src'));
+       $('#imagemodal').modal('show');   
+       });		
+   });
+</script>
 @endsection

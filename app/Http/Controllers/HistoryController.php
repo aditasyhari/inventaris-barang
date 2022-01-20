@@ -36,12 +36,30 @@ class HistoryController extends Controller
         }
     }
 
-    public function kembalikan($id)
+    public function kembalikan(Request $request, $id)
     {
         try {
+            $validator = Validator::make($request->all(), 
+                [ 
+                    'foto_bukti' => 'required|max:2048',
+                ]
+            );
+
+            if ($validator->fails()) {  
+                return back()->withErrors($validator); 
+            }
+
+            if ($request->hasFile('foto_bukti')) {
+                $fotoBukti = $request->file('foto_bukti');
+                $destinationPath = 'image/bukti/';
+                $namaBukti = date('YmdHis').".".$fotoBukti->getClientOriginalExtension();
+                $fotoBukti->move($destinationPath, $namaBukti);
+            }
+
             $p = Peminjaman::find($id);
             $p->update([
-                'status_kembali' => 'meminta'
+                'status_kembali' => 'meminta',
+                'foto_bukti' => $namaBukti,
             ]);
 
             return redirect('/history')->with('status', 'Meminta persetujuan pengembalian barang, sudah dikirim.');
