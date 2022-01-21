@@ -22,7 +22,12 @@ class PeminjamanController extends Controller
     {
         //
         $barang = Barang::orderBy('nama', 'asc')->get();
-        $peminjaman = Peminjaman::with(['user', 'user.profile'])->orderBy('id', 'desc')->get();
+        $peminjaman = Peminjaman::with(['user', 'user.profile'])
+                    ->where('status_kembali', 'meminta')
+                    ->orWhere('status_kembali', 'belum')
+                    ->orWhere('status_kembali', null)
+                    ->orderBy('id', 'desc')
+                    ->get();
 
         return view('peminjaman.peminjaman', compact(['barang', 'peminjaman']));
     }

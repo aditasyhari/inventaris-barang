@@ -29,7 +29,7 @@
                     <div class="form-group row">
                         <label for="example-text-input" class="col-sm-2 col-form-label">Kelas</label>
                         <div class="col-sm-10">
-                            <select class="custom-select" id="barang" required>
+                            <select class="custom-select" name="kelas" required>
                                 <option selected disabled>Pilih Kelas</option>
                                 <option value="10">Kelas 10</option>
                                 <option value="11">Kelas 11</option>
@@ -40,7 +40,13 @@
                     <div class="form-group row">
                         <label for="" class="col-sm-2 col-form-label">Mata Pelajaran</label>
                         <div class="col-sm-10">
-                            <input class="form-control" type="text" placeholder="Masukkan mapel" name="mapel" id="" required>
+                            <select class="custom-select" name="mapel" required>
+                                PKKR(PEMELIHARAAN KELISTRIKAN KENDARAAN RINGAN), PMKR(PEMELIHARAAN MESIN KENDARAAN RINGAN), DAN PEMELIHARAAN CHASIS
+                                <option selected disabled>Pilih Mapel</option>
+                                <option value="PKKR">PKKR (PEMELIHARAAN KELISTRIKAN KENDARAAN RINGAN)</option>
+                                <option value="PMKR">PMKR (PEMELIHARAAN MESIN KENDARAAN RINGAN)</option>
+                                <option value="PEMELIHARAAN CHASIS">PEMELIHARAAN CHASIS</option>
+                            </select>    
                         </div>
                     </div>
                     <div class="form-group row">

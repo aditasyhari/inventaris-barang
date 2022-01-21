@@ -17,7 +17,7 @@ class LaporanController extends Controller
     public function lihat(Request $request)
     {
         try {
-            $laporan = Peminjaman::with(['user', 'user.profile'])
+            $laporan = Peminjaman::with(['user', 'user.profile', 'peminjaman_barang', 'peminjaman_barang.barang'])
                     ->whereMonth('tgl_pinjam', $request->bulan)
                     ->whereYear('tgl_pinjam', $request->tahun)
                     ->where('status_kembali', 'selesai')

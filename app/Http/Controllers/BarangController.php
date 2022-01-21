@@ -50,7 +50,6 @@ class BarangController extends Controller
                     'kondisi' => 'required',
                     'harga' => 'required|numeric',
                     'jumlah' => 'required|numeric',
-                    'bawa_pulang' => 'required',
                     'foto' => 'required|max:2048',
                 ]
             );
@@ -123,7 +122,6 @@ class BarangController extends Controller
                     'harga' => 'required|numeric',
                     'jumlah' => 'required|numeric',
                     'tersedia' => 'required|numeric',
-                    'bawa_pulang' => 'required',
                     'foto' => 'nullable|max:2048',
                 ]
             );

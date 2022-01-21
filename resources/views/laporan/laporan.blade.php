@@ -76,35 +76,41 @@
                 <table id="table-report" class="table table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
                     <thead>
                         <tr>
-                            <th>No</th>
                             <th>Nama</th>
                             <th>Kelas</th>
                             <th>Mapel</th>
                             <th>Tgl Pinjam</th>
+                            <th>Barang</th>
+                            <th>Jumlah</th>
+                            <th>Kondisi</th>
                             <th>Status</th>
                         </tr>
                     </thead>
 
                     <tbody>
                         @foreach($lp as $p)
-                        <tr>
-                            <td>{{ $loop->iteration }}</td>
-                            <td>{{ $p->user->profile->nama }}</td>
-                            <td>{{ $p->kelas }}</td>
-                            <td>{{ $p->mapel }}</td>
-                            <td>{{ $p->tgl_pinjam }}</td>
-                            <td>
-                                @if($p->status_kembali == 'selesai')
-                                <span class="badge badge-primary text-uppercase">Sudah Dikembalikan</span>
-                                @elseif($p->status_kembali == 'belum')
-                                <span class="badge badge-secondary text-uppercase">Belum Dikembalikan</span>
-                                @elseif($p->status_kembali == 'meminta')
-                                <span class="badge badge-success text-uppercase">Request Pengembalian</span>
-                                @else
-                                ----
-                                @endif
-                            </td>
-                        </tr>
+                            @foreach($p->peminjaman_barang as $pb)
+                            <tr>
+                                <td>{{ $p->user->profile->nama }}</td>
+                                <td>{{ $p->kelas }}</td>
+                                <td>{{ $p->mapel }}</td>
+                                <td>{{ $p->tgl_pinjam }}</td>
+                                <td>{{ $pb->barang->nama }}</td>
+                                <td>{{ $pb->jumlah }}</td>
+                                <td>{{ $pb->barang->kondisi }}</td>
+                                <td>
+                                    @if($p->status_kembali == 'selesai')
+                                    <span class="badge badge-primary text-uppercase">Sudah Dikembalikan</span>
+                                    @elseif($p->status_kembali == 'belum')
+                                    <span class="badge badge-secondary text-uppercase">Belum Dikembalikan</span>
+                                    @elseif($p->status_kembali == 'meminta')
+                                    <span class="badge badge-success text-uppercase">Request Pengembalian</span>
+                                    @else
+                                    ----
+                                    @endif
+                                </td>
+                            </tr>
+                            @endforeach
                         @endforeach
                     </tbody>
                 </table>
@@ -132,7 +138,11 @@
 
     $(document).ready(function() {
         var tableLaporan = $('#table-report').DataTable( {
-            buttons: [ 'excel', 'pdf', 'print' ]
+            buttons: [ 'excel', 'pdf', 'print' ],
+            // columnDefs: [
+            //     { orderable: false, targets: 0 }
+            // ],
+            // orderable: false
         });
     
         tableLaporan.buttons().container().appendTo('#cus-btn');

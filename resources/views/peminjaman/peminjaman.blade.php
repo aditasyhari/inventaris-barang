@@ -43,7 +43,7 @@
         future.setMinutes(future.getMinutes() - future.getTimezoneOffset());
         document.getElementById('tgl_kembali').value = future.toISOString().slice(0,16);
     @else
-        future.setDate(future.getDate() + 4);
+        future.setDate(future.getDate() + 2);
         future.setMinutes(future.getMinutes() - future.getTimezoneOffset());
         document.getElementById('tgl_kembali').value = future.toISOString().slice(0,16);
     @endif

@@ -19,6 +19,7 @@
                             <th>Mapel</th>
                             <th>Tanggal Pinjam</th>
                             <th>Persetujuan</th>
+                            <th>Status</th>
                             <th>Action</th>
                         </tr>
                     </thead>
@@ -38,6 +39,17 @@
                                 <span class="badge badge-primary text-uppercase">{{ $p->persetujuan }}</span>
                                 @else
                                 <span class="badge badge-danger text-uppercase">{{ $p->persetujuan }}</span>
+                                @endif
+                            </td>
+                            <td>
+                                @if($p->status_kembali == 'selesai')
+                                <span class="badge badge-primary text-uppercase">Sudah Dikembalikan</span>
+                                @elseif($p->status_kembali == 'belum')
+                                <span class="badge badge-secondary text-uppercase">Belum Dikembalikan</span>
+                                @elseif($p->status_kembali == 'meminta')
+                                <span class="badge badge-success text-uppercase">Request Pengembalian</span>
+                                @else
+                                ----
                                 @endif
                             </td>
                             <td>
