@@ -66,13 +66,15 @@
                 <div class="form-group row">
                     <label for="" class="col-sm-2 col-form-label">Tanggal Pinjam</label>
                     <div class="col-sm-10">
-                        <input class="form-control" type="datetime-local" format-value="DD-MM-YYY HH:mm" name="tgl_pinjam" id="tgl_pinjam" value="{{ $p->tgl_pinjam }}" readonly>
+                        <input class="form-control" type="text" format-value="DD-MM-YYY HH:mm" name="tgl_pinjam" id="tgl_pinjam" value="{{ $p->tgl_pinjam }}" readonly>
+                        <!-- <input class="form-control" type="datetime-local" format-value="DD-MM-YYY HH:mm" name="tgl_pinjam" id="tgl_pinjam" value="{{ $p->tgl_pinjam }}" readonly> -->
                     </div>
                 </div>
                 <div class="form-group row">
                     <label for="" class="col-sm-2 col-form-label">Tanggal Kembali (Maksimal)</label>
                     <div class="col-sm-10">
-                        <input class="form-control" type="datetime-local" format-value="DD-MM-YYY HH:mm" name="tgl_kembali" id="tgl_kembali" value="{{ $p->tgl_kembali }}" readonly>
+                        <input class="form-control" type="text" format-value="DD-MM-YYY HH:mm" name="tgl_kembali" id="tgl_kembali" value="{{ $p->tgl_kembali }}" readonly>
+                        <!-- <input class="form-control" type="datetime-local" format-value="DD-MM-YYY HH:mm" name="tgl_kembali" id="tgl_kembali" value="{{ $p->tgl_kembali }}" readonly> -->
                     </div>
                 </div>
                 <div class="form-group row">
