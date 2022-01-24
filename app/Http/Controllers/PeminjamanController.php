@@ -146,14 +146,20 @@ class PeminjamanController extends Controller
         return Carbon::parse($value)->format('Y-m-d H:i:00');
     }
 
-    public function setuju($id)
+    public function setuju(Request $request, $id)
     {
         try {
             $p = Peminjaman::with(['peminjaman_barang', 'peminjaman_barang.barang'])->where('id', $id)->first();
 
+            $fotoBukti = $request->file('foto_bukti_peminjaman');
+            $destinationPath = 'image/bukti_peminjaman/';
+            $namaBukti = date('YmdHis').".".$fotoBukti->getClientOriginalExtension();
+            $fotoBukti->move($destinationPath, $namaBukti);
+
             $p->update([
                 'persetujuan' => 'disetujui',
-                'status_kembali' => 'belum'
+                'status_kembali' => 'belum',
+                'foto_bukti_peminjaman' => $namaBukti
             ]);
 
             if($p) {

@@ -107,31 +107,59 @@
                     </div>
                 </div>
 
+                @if($p->persetujuan == 'disetujui' || $p->persetujuan == 'selesai')
+                <div class="form-group row">
+                    <label for="" class="col-sm-2 col-form-label">Bukti Peminjaman</label>
+                    <div class="col-sm-10">
+                        <a href="#" class="pop">
+                            <img src="{{ asset('image/bukti_peminjaman/'.$p->foto_bukti_peminjaman) }}" alt="Foto Bukti Peminjaman" class="img-fluid" style="max-width: 400px">
+                        </a>
+                    </div>
+
+                    <div class="modal fade" id="imagemodal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-lg">							   
+                            <div class="modal-content">         						      
+                                <div class="modal-body">
+                                                                    
+                                <button type="button" class="close" data-dismiss="modal"><span 
+                                aria-hidden="true">&times;</span></button>						        
+                                <img src="" class="imagepreview" style="width: 100%;">
+                                                                
+                                </div>							    
+                            </div>								   
+                        </div>
+                    </div>
+
+                </div>
+                @endif
+
+                @if($p->status_kembali == 'meminta' || $p->status_kembali == 'selesai')
+                <div class="form-group row">
+                    <label for="" class="col-sm-2 col-form-label">Bukti Pengembalian</label>
+                    <div class="col-sm-10">
+                        <a href="#" class="pop">
+                            <img src="{{ asset('image/bukti/'.$p->foto_bukti) }}" alt="Foto Bukti" class="img-fluid" style="max-width: 400px">
+                        </a>
+                    </div>
+
+                    <div class="modal fade" id="imagemodal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-lg">							   
+                            <div class="modal-content">         						      
+                                <div class="modal-body">
+                                                                    
+                                <button type="button" class="close" data-dismiss="modal"><span 
+                                aria-hidden="true">&times;</span></button>						        
+                                <img src="" class="imagepreview" style="width: 100%;">
+                                                                
+                                </div>							    
+                            </div>								   
+                        </div>
+                    </div>
+                </div>
+                @endif
+
                 @if(Auth::user()->role == 'teknisi')
                     @if($p->status_kembali == 'meminta')
-                    <div class="form-group row">
-                        <label for="" class="col-sm-2 col-form-label">Bukti</label>
-                        <div class="col-sm-10">
-                            <a href="#" class="pop">
-                                <img src="{{ asset('image/bukti/'.$p->foto_bukti) }}" alt="Foto Bukti" class="img-fluid" style="max-width: 400px">
-                            </a>
-                        </div>
-
-                        <div class="modal fade" id="imagemodal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                            <div class="modal-dialog modal-lg">							   
-                                <div class="modal-content">         						      
-                                    <div class="modal-body">
-                                                                        
-                                    <button type="button" class="close" data-dismiss="modal"><span 
-                                    aria-hidden="true">&times;</span></button>						        
-                                    <img src="" class="imagepreview" style="width: 100%;">
-                                                                    
-                                    </div>							    
-                                </div>								   
-                            </div>
-                        </div>
-
-                    </div>
                     <div class="form-group row">
                         <label for="" class="col-sm-2 col-form-label"></label>
                         <div class="col-sm-10">

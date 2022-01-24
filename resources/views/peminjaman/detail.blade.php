@@ -108,14 +108,46 @@
                     </div>
                 </div>
 
+                @if($p->persetujuan == 'disetujui' || $p->persetujuan == 'selesai')
+                <div class="form-group row">
+                    <label for="" class="col-sm-2 col-form-label">Bukti Peminjaman</label>
+                    <div class="col-sm-10">
+                        <a href="#" class="pop">
+                            <img src="{{ asset('image/bukti_peminjaman/'.$p->foto_bukti_peminjaman) }}" alt="Foto Bukti Peminjaman" class="img-fluid" style="max-width: 400px">
+                        </a>
+                    </div>
+
+                    <div class="modal fade" id="imagemodal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-lg">							   
+                            <div class="modal-content">         						      
+                                <div class="modal-body">
+                                                                    
+                                <button type="button" class="close" data-dismiss="modal"><span 
+                                aria-hidden="true">&times;</span></button>						        
+                                <img src="" class="imagepreview" style="width: 100%;">
+                                                                
+                                </div>							    
+                            </div>								   
+                        </div>
+                    </div>
+
+                </div>
+                @endif
+
                 @if($p->persetujuan == 'pending')
+                <div class="form-group row">
+                    <label for="" class="col-sm-2 col-form-label">Unggah Bukti Peminjaman</label>
+                    <div class="col-sm-10">
+                        <form action="{{ url('/peminjaman/persetujuan/setuju/'.$p->id) }}" method="POST" enctype="multipart/form-data">
+                            @csrf
+                            @method('put')
+                            <input type="file" class="form-control" accept="images/*" name="foto_bukti_peminjaman" required>
+                    </div>
+                </div>
                 <div class="form-group row">
                     <label for="" class="col-sm-2 col-form-label"></label>
                     <div class="col-sm-10">
                         <div class="d-flex flex-row">
-                            <form action="{{ url('/peminjaman/persetujuan/setuju/'.$p->id) }}" method="POST">
-                                @csrf
-                                @method('put')
                                 <button type="submit" class="btn btn-primary">Setujui</button>
                             </form>
                             <form action="{{ url('/peminjaman/persetujuan/tolak/'.$p->id) }}" method="POST">
@@ -137,4 +169,13 @@
 @section('js')
 <script src="{{ asset('plugins/sweet-alert2/sweetalert2.min.js') }}"></script>
 <script src="{{ asset('assets/pages/peminjaman/peminjaman.js') }}"></script>
+
+<script>
+   $(function() {
+     $('.pop').on('click', function() {
+       $('.imagepreview').attr('src',$(this).find('img').attr('src'));
+       $('#imagemodal').modal('show');   
+       });		
+   });
+</script>
 @endsection
