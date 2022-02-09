@@ -1,5 +1,11 @@
 <?php
 
+use App\Models\Barang;
+use App\Models\Peminjaman;
+use App\Imports\SiswaImport;
+use App\Imports\GuruImport;
+use App\Imports\BarangImport;
+use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\UserController;
@@ -33,7 +39,17 @@ Route::middleware('auth')->group(function () {
     Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
     Route::get('/dashboard', function () {
-        return view('dashboard');
+        $total = Barang::count();
+        $tersedia = Barang::sum('tersedia');
+        $dipinjam = Peminjaman::from('peminjaman as p')
+        ->select('pb.jumlah')
+        ->leftJoin('peminjaman_barang as pb', 'p.id', '=', 'pb.peminjaman_id')
+        ->where([
+            ['persetujuan', 'disetujui'],
+            ['status_kembali', '!=', 'selesai']
+        ])
+        ->sum('pb.jumlah');
+        return view('dashboard', compact(['total', 'tersedia', 'dipinjam']));
     });
     
     Route::get('/profile', [AuthController::class, 'profile']);
@@ -76,6 +92,21 @@ Route::middleware('auth')->group(function () {
         Route::post('/data-user/tambah', [UserController::class, 'store']);
         Route::get('/data-user/ganti-status', [UserController::class, 'status']);
         Route::delete('/data-user/hapus/{id}', [UserController::class, 'destroy']);
+
+        Route::post('/data-user/siswa/import', function () {
+            Excel::import(new SiswaImport, request()->file('file'));
+            return back()->with('status', 'Data user siswa berhasil diimport!');
+        })->name('import-siswa');
+
+        Route::post('/data-user/guru/import', function () {
+            Excel::import(new GuruImport, request()->file('file'));
+            return back()->with('status', 'Data user guru berhasil diimport!');
+        })->name('import-guru');
+
+        Route::post('/data-barang/import', function () {
+            Excel::import(new BarangImport, request()->file('file'));
+            return back()->with('status', 'Data barang berhasil diimport!');
+        })->name('import-barang');
     });
     
 });

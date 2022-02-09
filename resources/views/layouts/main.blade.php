@@ -116,7 +116,6 @@
         <!-- Peity JS -->
         <script src="{{ asset('plugins/peity/jquery.peity.min.js') }}"></script>
 
-        <script src="{{ asset('plugins/morris/morris.min.js') }}"></script>
         <script src="{{ asset('plugins/raphael/raphael-min.js') }}"></script>
 
         <script src="{{ asset('assets/pages/dashboard.js') }}"></script>

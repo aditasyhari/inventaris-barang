@@ -138,11 +138,17 @@
 
     $(document).ready(function() {
         var tableLaporan = $('#table-report').DataTable( {
-            buttons: [ 'excel', 'pdf', 'print' ],
-            // columnDefs: [
-            //     { orderable: false, targets: 0 }
-            // ],
-            // orderable: false
+            buttons: [ 
+                {
+                    extend: 'print',
+                    customize: function ( win ) {
+                        $(win.document.body)
+                            .prepend(
+                                `<img src="{{ asset('image/logo.png') }}" style="width: 70px;"/>`
+                            );
+                    }
+                }
+            ],
         });
     
         tableLaporan.buttons().container().appendTo('#cus-btn');

@@ -27,7 +27,20 @@
         <div class="card m-b-20">
             <div class="card-body">
 
+                @if ($message = Session::get('status'))
+                    <div class="alert alert-primary alert-block">
+                        <button type="button" class="close" data-dismiss="alert">×</button>    
+                        <strong>{{ $message }}</strong>
+                    </div>
+                @endif
                 <a href="{{ url('/data-user/tambah') }}" class="btn btn-primary mb-3">Tambah</a>
+                <form action="{{ route('import-guru') }}" method="post" enctype="multipart/form-data">
+                    @csrf
+                    <div class="input-group mb-3">
+                        <input type="file" name="file" class="form-control" required>
+                        <button class="btn btn-primary" type="submit" id="button-addon2">Import</button>
+                    </div>
+                </form>
 
                 <table id="datatable" class="table table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
                      <thead>

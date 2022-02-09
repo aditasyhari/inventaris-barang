@@ -37,6 +37,14 @@
                     </div>
                 @endif
 
+                <form action="{{ route('import-barang') }}" method="post" enctype="multipart/form-data">
+                    @csrf
+                    <div class="input-group mb-3">
+                        <input type="file" name="file" class="form-control" required>
+                        <button class="btn btn-primary" type="submit" id="button-addon2">Import</button>
+                    </div>
+                </form>
+
                 <table id="datatable" class="table table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
                     <thead>
                         <tr>
