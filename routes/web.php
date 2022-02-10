@@ -13,6 +13,7 @@ use App\Http\Controllers\BarangController;
 use App\Http\Controllers\PeminjamanController;
 use App\Http\Controllers\HistoryController;
 use App\Http\Controllers\LaporanController;
+use Illuminate\Support\Facades\DB;
 
 /*
 |--------------------------------------------------------------------------
@@ -42,14 +43,29 @@ Route::middleware('auth')->group(function () {
         $total = Barang::count();
         $tersedia = Barang::sum('tersedia');
         $dipinjam = Peminjaman::from('peminjaman as p')
-        ->select('pb.jumlah')
-        ->leftJoin('peminjaman_barang as pb', 'p.id', '=', 'pb.peminjaman_id')
-        ->where([
-            ['persetujuan', 'disetujui'],
-            ['status_kembali', '!=', 'selesai']
-        ])
-        ->sum('pb.jumlah');
-        return view('dashboard', compact(['total', 'tersedia', 'dipinjam']));
+                ->select('pb.jumlah')
+                ->leftJoin('peminjaman_barang as pb', 'p.id', '=', 'pb.peminjaman_id')
+                ->where([
+                    ['persetujuan', 'disetujui'],
+                    ['status_kembali', '!=', 'selesai']
+                ])
+                ->sum('pb.jumlah');
+
+        $data_gf = DB::table('barang as b')
+                    ->selectRaw(
+                        'barang_id, b.jumlah, b.tersedia, b.nama, (b.jumlah - b.tersedia) dipinjam'
+                    )
+                    ->leftJoin('peminjaman_barang as pb', 'pb.barang_id', '=', 'b.id')
+                    ->leftJoin('peminjaman as p', 'p.id', '=', 'pb.peminjaman_id')
+                    ->where([
+                        ['p.persetujuan', 'disetujui'],
+                        ['p.status_kembali', '!=', 'selesai']
+                    ])
+                    ->groupBy('barang_id', 'b.nama', 'b.jumlah', 'b.tersedia', 'dipinjam')
+                    ->get();
+
+        // dd($data_gf);
+        return view('dashboard', compact(['total', 'tersedia', 'dipinjam', 'data_gf']));
     });
     
     Route::get('/profile', [AuthController::class, 'profile']);

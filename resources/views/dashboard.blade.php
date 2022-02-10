@@ -25,7 +25,6 @@
     <div class="col-xl-12">
         <div class="card m-b-30">
             <div class="card-body">
-
                 <h4 class="mt-0 header-title">Grafik Barang</h4>
 
                 <ul class="list-inline widget-chart m-t-20 m-b-15 text-center">
@@ -65,6 +64,14 @@
 @endsection
 
 @section('js')
+<?php 
+    $chart_data = '';
+    foreach($data_gf as $gf)
+    {
+        $chart_data .= "{y: '".$gf->nama."', a: '".$gf->jumlah."', b: '".$gf->tersedia."', c: '".$gf->dipinjam."'}, ";
+    }
+    $chart_data = substr($chart_data, 0);
+?>
 <script src="{{ asset('plugins/morris/morris.min.js') }}"></script>
 
 <script>
@@ -76,7 +83,7 @@
 
             //creates line chart
             MorrisCharts.prototype.createLineChart = function (element, data, xkey, ykeys, labels, lineColors) {
-                Morris.Line({
+                Morris.Bar({
                     element: element,
                     data: data,
                     xkey: xkey,
@@ -92,16 +99,7 @@
 
             MorrisCharts.prototype.init = function () {
 
-                //create line chart
-                var $data = [
-                    {y: '2009', a: 50, b: 80, c: 20},
-                    {y: '2010', a: 130, b: 100, c: 80},
-                    {y: '2011', a: 80, b: 60, c: 70},
-                    {y: '2012', a: 70, b: 200, c: 140},
-                    {y: '2013', a: 180, b: 140, c: 150},
-                    {y: '2014', a: 105, b: 100, c: 80},
-                    {y: '2015', a: 250, b: 150, c: 200}
-                ];
+                var $data = [<?php echo $chart_data; ?>];
                 this.createLineChart('morris-line-example', $data, 'y', ['a', 'b', 'c'], ['Jumlah', 'Tersedia', 'Dipinjam'], ['#ccc', '#35a989', '#ffe082']);
 
             },
